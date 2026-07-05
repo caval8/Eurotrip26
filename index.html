@@ -1,0 +1,1672 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eurotrip Camilo 2026</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  :root {
+    --night: #0D0F14;
+    --deep: #141720;
+    --surface: #1C2030;
+    --card: #232838;
+    --border: #2E3548;
+    --muted: #4A5270;
+    --text: #C8D0E8;
+    --bright: #E8EEFF;
+    --gold: #F0B429;
+    --amber: #E8821A;
+    --teal: #2DD4BF;
+    --rose: #F472B6;
+    --violet: #A78BFA;
+    --green: #4ADE80;
+    --red: #F87171;
+    --barcelona: #A50044;
+    --roma: #C8A86B;
+    --florencia: #8B7355;
+    --cinque: #2E8B57;
+    --suiza: #DC143C;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--night);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(13,15,20,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 32px;
+    height: 56px;
+  }
+
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bright);
+    letter-spacing: -0.3px;
+  }
+
+  .nav-brand span { color: var(--gold); }
+
+  .nav-tabs {
+    display: flex;
+    gap: 4px;
+  }
+
+  .nav-tab {
+    padding: 6px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--muted);
+    border: none;
+    background: transparent;
+    transition: all 0.2s;
+  }
+
+  .nav-tab:hover { color: var(--text); background: var(--surface); }
+  .nav-tab.active { color: var(--bright); background: var(--card); }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--deep) 0%, #1A1F35 50%, var(--deep) 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 32px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(240,180,41,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-route {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 42px;
+    font-weight: 900;
+    color: var(--bright);
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+
+  .hero-sub {
+    color: var(--muted);
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+
+  .hero-stats {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .stat-value {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--bright);
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+
+  .stat-divider {
+    width: 1px;
+    background: var(--border);
+    align-self: stretch;
+  }
+
+  /* CONTENT */
+  .content {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 32px 32px 80px;
+  }
+
+  .tab-content { display: none; }
+  .tab-content.active { display: block; }
+
+  /* SECTION TITLE */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--bright);
+    margin-bottom: 20px;
+    margin-top: 36px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .section-title:first-child { margin-top: 0; }
+
+  .section-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--surface);
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* TIMELINE */
+  .timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 8px; bottom: 8px;
+    width: 2px;
+    background: linear-gradient(to bottom, var(--gold), var(--teal), var(--violet));
+    border-radius: 2px;
+  }
+
+  .timeline-phase {
+    margin-bottom: 8px;
+  }
+
+  .phase-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 8px;
+    margin-top: 24px;
+    padding-left: 4px;
+  }
+
+  .phase-label:first-child { margin-top: 0; }
+
+  .timeline-day {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 16px;
+    align-items: start;
+    margin-bottom: 6px;
+    position: relative;
+  }
+
+  .timeline-day::before {
+    content: '';
+    position: absolute;
+    left: -32px;
+    top: 14px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid var(--border);
+  }
+
+  .timeline-day.highlight::before { border-color: var(--gold); background: var(--gold); }
+  .timeline-day.special::before { border-color: var(--teal); background: var(--teal); }
+
+  .day-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    padding-top: 12px;
+    line-height: 1.4;
+  }
+
+  .day-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 12px 16px;
+    transition: border-color 0.2s;
+  }
+
+  .day-card:hover { border-color: var(--muted); }
+
+  .day-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+  }
+
+  .city-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .day-city {
+    font-weight: 600;
+    color: var(--bright);
+    font-size: 14px;
+  }
+
+  .day-emoji { font-size: 14px; }
+
+  .day-desc {
+    color: var(--text);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  .day-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+    margin-top: 8px;
+  }
+
+  .tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .tag-must { background: rgba(240,180,41,0.12); color: var(--gold); }
+  .tag-food { background: rgba(244,114,182,0.12); color: var(--rose); }
+  .tag-nature { background: rgba(45,212,191,0.12); color: var(--teal); }
+  .tag-transport { background: rgba(167,139,250,0.12); color: var(--violet); }
+  .tag-sport { background: rgba(165,0,68,0.2); color: #FF6B8A; }
+
+  /* CARDS GRID */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.2s;
+  }
+
+  .card:hover { border-color: var(--muted); transform: translateY(-1px); }
+
+  .card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .card-title {
+    font-weight: 600;
+    color: var(--bright);
+    font-size: 15px;
+  }
+
+  .card-sub {
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  .card-badge {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 500;
+  }
+
+  .badge-flight { background: rgba(167,139,250,0.15); color: var(--violet); }
+  .badge-train { background: rgba(45,212,191,0.15); color: var(--teal); }
+  .badge-hotel { background: rgba(240,180,41,0.15); color: var(--gold); }
+  .badge-urgent { background: rgba(248,113,113,0.15); color: var(--red); }
+  .badge-done { background: rgba(74,222,128,0.15); color: var(--green); }
+
+  .card-detail {
+    font-size: 13px;
+    color: var(--text);
+    margin-bottom: 6px;
+    display: flex;
+    gap: 8px;
+  }
+
+  .card-detail-label {
+    color: var(--muted);
+    min-width: 80px;
+    font-size: 12px;
+  }
+
+  .price-eur {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 14px;
+    color: var(--gold);
+    font-weight: 500;
+  }
+
+  .price-cop {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 12px;
+    color: var(--teal);
+    text-decoration: none;
+    margin-top: 10px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .card-link:hover { text-decoration: underline; }
+
+  /* BUDGET TABLE */
+  .budget-container {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+
+  .budget-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .budget-table th {
+    background: var(--surface);
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 11px;
+    font-family: 'JetBrains Mono', monospace;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .budget-table td {
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  .budget-table tr:last-child td { border-bottom: none; }
+
+  .budget-table tr.total td {
+    background: var(--surface);
+    font-weight: 600;
+    color: var(--bright);
+    border-top: 2px solid var(--border);
+  }
+
+  .budget-table tr:hover:not(.total) td { background: rgba(255,255,255,0.02); }
+
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  .text-gold { color: var(--gold); }
+  .text-bright { color: var(--bright); }
+  .text-muted { color: var(--muted); }
+  .text-green { color: var(--green); }
+  .text-red { color: var(--red); }
+
+  /* CHECKLIST */
+  .checklist {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .check-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .check-item:hover { border-color: var(--muted); }
+  .check-item.checked { opacity: 0.5; }
+  .check-item.checked .check-text { text-decoration: line-through; }
+
+  .check-box {
+    width: 18px; height: 18px;
+    border-radius: 5px;
+    border: 2px solid var(--border);
+    flex-shrink: 0;
+    margin-top: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    font-size: 11px;
+  }
+
+  .check-item.checked .check-box {
+    background: var(--green);
+    border-color: var(--green);
+    color: var(--night);
+  }
+
+  .check-text { flex: 1; font-size: 13px; }
+  .check-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  .urgency-now { border-left: 3px solid var(--red); }
+  .urgency-soon { border-left: 3px solid var(--gold); }
+  .urgency-before { border-left: 3px solid var(--teal); }
+
+  /* HOTEL CARD */
+  .hotel-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+
+  .hotel-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .hotel-city {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .city-flag {
+    font-size: 20px;
+  }
+
+  .hotel-city-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--bright);
+  }
+
+  .hotel-nights {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  .hotel-options {
+    padding: 0;
+  }
+
+  .hotel-option {
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--border);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    align-items: center;
+  }
+
+  .hotel-option:last-child { border-bottom: none; }
+  .hotel-option.recommended { background: rgba(240,180,41,0.04); }
+
+  .hotel-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--bright);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .hotel-stars { color: var(--gold); font-size: 11px; }
+  .rec-badge { font-size: 10px; background: rgba(240,180,41,0.15); color: var(--gold); padding: 2px 6px; border-radius: 3px; font-family: 'JetBrains Mono', monospace; }
+
+  .hotel-desc { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+  .hotel-price {
+    text-align: right;
+  }
+
+  .hotel-eur { font-family: 'JetBrains Mono', monospace; font-size: 15px; color: var(--gold); font-weight: 600; }
+  .hotel-cop { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+  .hotel-per { font-size: 10px; color: var(--muted); }
+
+  /* INFALTABLES */
+  .must-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 12px;
+  }
+
+  .must-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+
+  .must-city-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .must-item {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: var(--text);
+    align-items: flex-start;
+  }
+
+  .must-icon { flex-shrink: 0; font-size: 14px; }
+
+  /* PROGRESS */
+  .progress-bar {
+    height: 4px;
+    background: var(--border);
+    border-radius: 2px;
+    margin-top: 20px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(to right, var(--gold), var(--teal));
+    border-radius: 2px;
+    transition: width 0.5s;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* RESPONSIVE */
+  @media (max-width: 640px) {
+    nav { padding: 0 16px; }
+    .hero { padding: 32px 16px 28px; }
+    .hero-title { font-size: 28px; }
+    .content { padding: 20px 16px 60px; }
+    .timeline-day { grid-template-columns: 64px 1fr; gap: 10px; }
+    .nav-tab { padding: 6px 10px; font-size: 12px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Eurotrip <span>2026</span></div>
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showTab('itinerary')">Itinerario</button>
+    <button class="nav-tab" onclick="showTab('transport')">Transporte</button>
+    <button class="nav-tab" onclick="showTab('hotels')">Hoteles</button>
+    <button class="nav-tab" onclick="showTab('budget')">Presupuesto</button>
+    <button class="nav-tab" onclick="showTab('checklist')">Checklist</button>
+    <button class="nav-tab" onclick="showTab('musts')">Infaltables</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-route">MDE → MAD → BCN → ROM → FLR → CIN → MIL → ZRH → MAD → MDE</div>
+  <div class="hero-title">El Gran Viaje</div>
+  <div class="hero-sub">19 sep – 8 oct 2026 &nbsp;·&nbsp; 18 días &nbsp;·&nbsp; 6 ciudades &nbsp;·&nbsp; Solo</div>
+  <div class="hero-stats">
+    <div class="stat">
+      <span class="stat-value">18</span>
+      <span class="stat-label">Días totales</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-value">6</span>
+      <span class="stat-label">Ciudades</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-value">2</span>
+      <span class="stat-label">Vuelos internos</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-value">~€1.700</span>
+      <span class="stat-label">Presupuesto estimado</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <span class="stat-value">~$6,8M</span>
+      <span class="stat-label">En pesos COP</span>
+    </div>
+  </div>
+  <div class="progress-bar" id="progressBar">
+    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+  </div>
+  <div class="progress-label">
+    <span>Planificación</span>
+    <span id="progressText">0% completado</span>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- ITINERARY TAB -->
+  <div id="tab-itinerary" class="tab-content active">
+    <div class="timeline">
+
+      <div class="phase-label">📚 Fase 1 — Madrid académica</div>
+
+      <div class="timeline-day">
+        <div class="day-date">19 sep<br>Viernes</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:#E84393"></div>
+            <div class="day-city">Medellín → Madrid</div>
+            <div class="day-emoji">✈️</div>
+          </div>
+          <div class="day-desc">Sale desde MDE en la mañana. Vuelo largo — descansa, no hagas nada heroico en el avión.</div>
+          <div class="day-tags"><span class="tag tag-transport">Vuelo MDE→MAD</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-day highlight">
+        <div class="day-date">20 sep<br>Sábado</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:#E84393"></div>
+            <div class="day-city">Llega Madrid — medianoche</div>
+            <div class="day-emoji">🌙</div>
+          </div>
+          <div class="day-desc">Llegas a medianoche. Directo al hotel. No intentes hacer nada. El jet lag es real.</div>
+          <div class="day-tags"><span class="tag tag-transport">Aterriza MAD</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">21–25 sep<br>Dom–Jue</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:#E84393"></div>
+            <div class="day-city">Madrid — Semana ESIC</div>
+            <div class="day-emoji">📖</div>
+          </div>
+          <div class="day-desc">Clases en ESIC (Pozuelo de Alarcón). Pero las tardes son tuyas: Museo del Prado, Reina Sofía, Retiro, Mercado de San Miguel, Malasaña. Madrid de noche es otra ciudad.</div>
+          <div class="day-tags">
+            <span class="tag tag-must">Prado gratis 18h–20h</span>
+            <span class="tag tag-food">Mercado San Miguel</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">25 sep<br>Viernes</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:#E84393"></div>
+            <div class="day-city">Madrid — Última noche</div>
+            <div class="day-emoji">🍷</div>
+          </div>
+          <div class="day-desc">Cierre académico. Cena en un sitio con historia — Sobrino de Botín (el restaurante más antiguo del mundo según Guinness, desde 1725). Reserva con anticipación.</div>
+          <div class="day-tags"><span class="tag tag-food">Cena especial</span></div>
+        </div>
+      </div>
+
+      <div class="phase-label">🗺️ Fase 2 — El Eurotrip</div>
+
+      <div class="timeline-day highlight">
+        <div class="day-date">26 sep<br>Sábado</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--barcelona)"></div>
+            <div class="day-city">Madrid → Barcelona</div>
+            <div class="day-emoji">🚄</div>
+          </div>
+          <div class="day-desc">Tren AVE o Ouigo (tarde). 2.5h y estás en otra ciudad. Llegada a El Born, primera cerveza frente al mar.</div>
+          <div class="day-tags"><span class="tag tag-transport">Ouigo / AVE tarde</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-day special">
+        <div class="day-date">27 sep<br>Domingo</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--barcelona)"></div>
+            <div class="day-city">Barcelona</div>
+            <div class="day-emoji">🏟️</div>
+          </div>
+          <div class="day-desc">Tour Camp Nou en la mañana — el templo del fútbol. Sagrada Família en la tarde (reserva online 3 semanas antes). El Born de noche.</div>
+          <div class="day-tags">
+            <span class="tag tag-sport">🔵🔴 Camp Nou</span>
+            <span class="tag tag-must">Sagrada Família</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">28 sep<br>Lunes</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--barcelona)"></div>
+            <div class="day-city">Barcelona → Roma</div>
+            <div class="day-emoji">✈️</div>
+          </div>
+          <div class="day-desc">Vuelo mañana. Si hay partido de Barça en casa el 27 (revisa calendario LaLiga el 30 jun), ajusta el vuelo al 28 tarde. Llegada a Roma al mediodía — Trastevere de noche.</div>
+          <div class="day-tags">
+            <span class="tag tag-transport">Vuelo BCN→ROM</span>
+            <span class="tag tag-must">Trastevere noche</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">29 sep<br>Martes</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--roma)"></div>
+            <div class="day-city">Roma — Día 1</div>
+            <div class="day-emoji">🏛️</div>
+          </div>
+          <div class="day-desc">Coliseo + Foro Romano + Arco de Constantino. Reserva combo online con antelación — evitas 2h de fila. Circo Máximo al atardecer.</div>
+          <div class="day-tags"><span class="tag tag-must">Coliseo (reserva online)</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">30 sep<br>Miércoles</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--roma)"></div>
+            <div class="day-city">Roma — Día 2</div>
+            <div class="day-emoji">✝️</div>
+          </div>
+          <div class="day-desc">Vaticano + Capilla Sixtina (lo más impactante del viaje). Reserva con 2 semanas de antelación. Tarde en Castel Sant'Angelo y cruzar el Tíber de noche.</div>
+          <div class="day-tags"><span class="tag tag-must">Capilla Sixtina (reserva)</span></div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">1 oct<br>Jueves</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--roma)"></div>
+            <div class="day-city">Roma — Día 3</div>
+            <div class="day-emoji">⛲</div>
+          </div>
+          <div class="day-desc">Roma a pie: Fontana di Trevi → Panteón → Piazza Navona → Campo de' Fiori → Boca de la Verdad. Cenar en trattoria sin menú en inglés en la puerta.</div>
+          <div class="day-tags">
+            <span class="tag tag-must">Roma a pie</span>
+            <span class="tag tag-food">Cacio e pepe auténtico</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day highlight">
+        <div class="day-date">2 oct<br>Viernes</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--florencia)"></div>
+            <div class="day-city">Roma → Florencia</div>
+            <div class="day-emoji">🚄</div>
+          </div>
+          <div class="day-desc">Tren AV 1h30. Llegar al mediodía. Duomo, Ponte Vecchio, y al atardecer subir al Piazzale Michelangelo — la mejor vista de Europa, gratis.</div>
+          <div class="day-tags">
+            <span class="tag tag-transport">Trenitalia AV</span>
+            <span class="tag tag-must">Piazzale Michelangelo sunset</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">3 oct<br>Sábado</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--florencia)"></div>
+            <div class="day-city">Florencia</div>
+            <div class="day-emoji">🖼️</div>
+          </div>
+          <div class="day-desc">Galería Uffizi (el Nacimiento de Venus, La Primavera). Reserva online. Palazzo Vecchio, mercado central, helado artesanal en Vivoli.</div>
+          <div class="day-tags">
+            <span class="tag tag-must">Uffizi (reserva online)</span>
+            <span class="tag tag-food">Gelato Vivoli</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day special">
+        <div class="day-date">4 oct<br>Domingo</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--cinque)"></div>
+            <div class="day-city">Florencia → Cinque Terre</div>
+            <div class="day-emoji">🌊</div>
+          </div>
+          <div class="day-desc">Tren a La Spezia (1h). Base en La Spezia. Tarde en Vernazza — el pueblo más fotogénico de los 5. Atardecer desde los acantilados.</div>
+          <div class="day-tags">
+            <span class="tag tag-nature">Vernazza</span>
+            <span class="tag tag-transport">Tren Trenitalia</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">5 oct<br>Lunes</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--cinque)"></div>
+            <div class="day-city">Cinque Terre</div>
+            <div class="day-emoji">🥾</div>
+          </div>
+          <div class="day-desc">Sendero costero Vernazza–Corniglia (2h, vistas imposibles). Monterosso al mare. Atardecer desde Manarola — la postal más icónica de Italia.</div>
+          <div class="day-tags">
+            <span class="tag tag-nature">Sendero costero</span>
+            <span class="tag tag-must">Manarola sunset</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day special">
+        <div class="day-date">6 oct<br>Martes</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--suiza)"></div>
+            <div class="day-city">🚂 Bernina Express — el día épico</div>
+            <div class="day-emoji">🏔️</div>
+          </div>
+          <div class="day-desc">La Spezia → Milán (2h). Milán → Tirano en tren regional (2h). Luego el Bernina Express panorámico: Tirano → St. Moritz → Chur → Zurich. Glaciares, Alpes, UNESCO. Siéntate a la derecha del tren.</div>
+          <div class="day-tags">
+            <span class="tag tag-must">Bernina Express UNESCO</span>
+            <span class="tag tag-nature">Glaciar Morteratsch</span>
+            <span class="tag tag-transport">Reserva en berninaexpress.ch</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">7 oct<br>Miércoles</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:var(--suiza)"></div>
+            <div class="day-city">Zurich → Madrid</div>
+            <div class="day-emoji">🌊</div>
+          </div>
+          <div class="day-desc">Mañana libre en Zurich: Niederdorf a pie, lago Zurich con los Alpes al fondo. Vuelo tarde/noche a Madrid. Esa noche en Madrid, o aeropuerto si el vuelo llega tarde.</div>
+          <div class="day-tags">
+            <span class="tag tag-nature">Lago Zurich</span>
+            <span class="tag tag-transport">Vuelo ZRH→MAD</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="timeline-day">
+        <div class="day-date">8 oct<br>Jueves 2am</div>
+        <div class="day-card">
+          <div class="day-header">
+            <div class="city-dot" style="background:#E84393"></div>
+            <div class="day-city">Madrid → Medellín</div>
+            <div class="day-emoji">🏠</div>
+          </div>
+          <div class="day-desc">Vuelo de regreso a las 2am hora España. Llegada a Medellín. Con historias para el resto de la vida.</div>
+          <div class="day-tags"><span class="tag tag-transport">MAD → MDE</span></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TRANSPORT TAB -->
+  <div id="tab-transport" class="tab-content">
+    <div class="section-title">Vuelos internos <span class="section-badge">2 vuelos</span></div>
+    <div class="cards-grid">
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">✈️ Barcelona → Roma</div>
+            <div class="card-sub">28 sep · ~1h45</div>
+          </div>
+          <span class="card-badge badge-urgent">COMPRA YA</span>
+        </div>
+        <div class="card-detail"><span class="card-detail-label">Aerolínea</span> Vueling / Ryanair directo</div>
+        <div class="card-detail"><span class="card-detail-label">Precio</span> <span class="price-eur">€30–60</span> <span class="price-cop">$120K–$240K</span></div>
+        <div class="card-detail"><span class="card-detail-label">Reservar</span> vueling.com / ryanair.com</div>
+        <a class="card-link" href="https://www.vueling.com" target="_blank">→ vueling.com</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">✈️ Zurich → Madrid</div>
+            <div class="card-sub">7 oct · ~2h30</div>
+          </div>
+          <span class="card-badge badge-urgent">COMPRA YA</span>
+        </div>
+        <div class="card-detail"><span class="card-detail-label">Aerolínea</span> Iberia / Swiss directo</div>
+        <div class="card-detail"><span class="card-detail-label">Precio</span> <span class="price-eur">€70–110</span> <span class="price-cop">$280K–$440K</span></div>
+        <div class="card-detail"><span class="card-detail-label">Reservar</span> iberia.com</div>
+        <a class="card-link" href="https://www.iberia.com" target="_blank">→ iberia.com</a>
+      </div>
+
+    </div>
+
+    <div class="section-title">Trenes <span class="section-badge">toda la ruta</span></div>
+    <div class="cards-grid">
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🚄 Madrid → Barcelona</div>
+            <div class="card-sub">26 sep tarde · 2h30</div>
+          </div>
+          <span class="card-badge badge-train">TREN</span>
+        </div>
+        <div class="card-detail"><span class="card-detail-label">Operador</span> Ouigo (más barato) o AVE Renfe</div>
+        <div class="card-detail"><span class="card-detail-label">Precio</span> <span class="price-eur">€15–35</span> <span class="price-cop">$60K–$140K</span></div>
+        <a class="card-link" href="https://www.ouigo.com" target="_blank">→ ouigo.com</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🚄 Roma → Florencia</div>
+            <div class="card-sub">2 oct · 1h30</div>
+          </div>
+          <span class="card-badge badge-train">TREN AV</span>
+        </div>
+        <div class="card-detail"><span class="card-detail-label">Operador</span> Trenitalia Frecciargento</div>
+        <div class="card-detail"><span class="card-detail-label">Precio</span> <span class="price-eur">€20–40</span> <span class="price-cop">$80K–$160K</span></div>
+        <a class="card-link" href="https://www.trenitalia.com" target="_blank">→ trenitalia.com</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🚄 Florencia → La Spezia</div>
+            <div class="card-sub">4 oct · 1h</div>
+          </div>
+          <span class="card-badge badge-train">TREN</span>
+        </div>
+        <div class="card-detail"><span class="card-detail-label">Operador</span> Trenitalia regional</div>
+        <div class="card-detail"><span class="card-detail-label">Precio</span> <span class="price-eur">€12–18</span> <span class="price-cop">$48K–$72K</span></div>
+        <a class="card-link" href="https://www.trenitalia.com" target="_blank">→ trenitalia.com</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🚄 La Spezia → Milán</div>
+            <div class="card-sub">6 oct mañana · 2h</div>
+          </div>
+          <span class="card-badge badge-train">TREN</span>
+        </div>
+        <div class="card-detail"><span class="card-detail-label">Operador</span> Trenitalia / Italo</div>
+        <div class="card-detail"><span class="card-detail-label">Precio</span> <span class="price-eur">€18–30</span> <span class="price-cop">$72K–$120K</span></div>
+        <a class="card-link" href="https://www.trenitalia.com" target="_blank">→ trenitalia.com</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🚄 Milán → Tirano</div>
+            <div class="card-sub">6 oct · 2h</div>
+          </div>
+          <span class="card-badge badge-train">TREN</span>
+        </div>
+        <div class="card-detail"><span class="card-detail-label">Operador</span> Trenord regional</div>
+        <div class="card-detail"><span class="card-detail-label">Precio</span> <span class="price-eur">€12–15</span> <span class="price-cop">$48K–$60K</span></div>
+        <div class="card-detail"><span class="card-detail-label">Nota</span> Sale muy temprano — planea bien</div>
+      </div>
+
+      <div class="card" style="border-color: var(--gold);">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🏔️ Bernina Express</div>
+            <div class="card-sub">6 oct · Tirano→St.Moritz→Chur · 2h30</div>
+          </div>
+          <span class="card-badge badge-urgent">RESERVA YA</span>
+        </div>
+        <div class="card-detail"><span class="card-detail-label">Operador</span> Ferrocarril Rético (RhB)</div>
+        <div class="card-detail"><span class="card-detail-label">Precio</span> <span class="price-eur">€66–116</span> <span class="price-cop">$264K–$464K</span></div>
+        <div class="card-detail"><span class="card-detail-label">Asiento</span> Reserva obligatoria + billete</div>
+        <div class="card-detail"><span class="card-detail-label">💡 Tip</span> Siéntate a la derecha (sentido Italia→Suiza)</div>
+        <a class="card-link" href="https://www.rhb.ch" target="_blank">→ berninaexpress.ch</a>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div>
+            <div class="card-title">🚄 Chur → Zurich</div>
+            <div class="card-sub">6 oct tarde · 1h15</div>
+          </div>
+          <span class="card-badge badge-train">TREN SBB</span>
+        </div>
+        <div class="card-detail"><span class="card-detail-label">Operador</span> SBB Swiss Federal Railways</div>
+        <div class="card-detail"><span class="card-detail-label">Precio</span> <span class="price-eur">€18–25</span> <span class="price-cop">$72K–$100K</span></div>
+        <a class="card-link" href="https://www.sbb.ch" target="_blank">→ sbb.ch</a>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- HOTELS TAB -->
+  <div id="tab-hotels" class="tab-content">
+
+    <div class="section-title">Hospedaje por ciudad <span class="section-badge">9 noches Eurotrip + Madrid</span></div>
+
+    <div class="hotel-card">
+      <div class="hotel-header">
+        <div class="hotel-city">
+          <span class="city-flag">🇪🇸</span>
+          <div>
+            <div class="hotel-city-name">Madrid</div>
+            <div class="hotel-nights">20–26 sep · 6 noches académicas</div>
+          </div>
+        </div>
+      </div>
+      <div class="hotel-options">
+        <div class="hotel-option recommended">
+          <div>
+            <div class="hotel-name">Hotel Praktik Metropol <span class="hotel-stars">★★★★</span> <span class="rec-badge">RECOMENDADO</span></div>
+            <div class="hotel-desc">Gran Vía, centro absoluto. Edificio histórico modernista. Azotea con vistas. Perfecto para moverte a ESIC y a la ciudad.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€80–110</div>
+            <div class="hotel-cop">$320K–$440K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+        <div class="hotel-option">
+          <div>
+            <div class="hotel-name">Only You Hotel Atocha <span class="hotel-stars">★★★★</span></div>
+            <div class="hotel-desc">Cerca de Atocha y El Retiro. Boutique con mucho carácter. Un poco más caro pero nivel superior.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€120–160</div>
+            <div class="hotel-cop">$480K–$640K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-header">
+        <div class="hotel-city">
+          <span class="city-flag">🇪🇸</span>
+          <div>
+            <div class="hotel-city-name">Barcelona</div>
+            <div class="hotel-nights">26–28 sep · 2 noches</div>
+          </div>
+        </div>
+      </div>
+      <div class="hotel-options">
+        <div class="hotel-option recommended">
+          <div>
+            <div class="hotel-name">Hotel Via Augusta <span class="hotel-stars">★★★</span> <span class="rec-badge">MEJOR PRECIO/CALIDAD</span></div>
+            <div class="hotel-desc">Cerca de Casa Batlló. Terraza espectacular. +1.300 reseñas, nota 8.5. Guardaequipaje.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€65–85</div>
+            <div class="hotel-cop">$260K–$340K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+        <div class="hotel-option">
+          <div>
+            <div class="hotel-name">H10 Ítaca <span class="hotel-stars">★★★</span></div>
+            <div class="hotel-desc">200m de Sants (estación trenes para el AVE de salida). Habitaciones Deluxe, moderno y funcional.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€75–100</div>
+            <div class="hotel-cop">$300K–$400K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-header">
+        <div class="hotel-city">
+          <span class="city-flag">🇮🇹</span>
+          <div>
+            <div class="hotel-city-name">Roma</div>
+            <div class="hotel-nights">28 sep – 2 oct · 3 noches — zona Trastevere</div>
+          </div>
+        </div>
+      </div>
+      <div class="hotel-options">
+        <div class="hotel-option recommended">
+          <div>
+            <div class="hotel-name">Hotel Santa Maria <span class="hotel-stars">★★★</span> <span class="rec-badge">RECOMENDADO</span></div>
+            <div class="hotel-desc">Ex monasterio s.XVI con patio interior. El hotel más icónico de Trastevere. Muy valorado, excelente ubicación.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€90–120</div>
+            <div class="hotel-cop">$360K–$480K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+        <div class="hotel-option">
+          <div>
+            <div class="hotel-name">Horti 14 Borgo Trastevere <span class="hotel-stars">★★★★</span></div>
+            <div class="hotel-desc">Moderno, elegante. Vaticano a 1km. Jardín interior. Zona tranquila dentro del barrio.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€110–140</div>
+            <div class="hotel-cop">$440K–$560K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+        <div class="hotel-option">
+          <div>
+            <div class="hotel-name">B&B Hotel Roma Trastevere <span class="hotel-stars">★★★</span></div>
+            <div class="hotel-desc">Opción económica sólida. Junto a la estación. Desayuno buffet incluido. Funcional y bien ubicado.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€70–95</div>
+            <div class="hotel-cop">$280K–$380K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-header">
+        <div class="hotel-city">
+          <span class="city-flag">🇮🇹</span>
+          <div>
+            <div class="hotel-city-name">Florencia</div>
+            <div class="hotel-nights">2–4 oct · 2 noches — centro histórico</div>
+          </div>
+        </div>
+      </div>
+      <div class="hotel-options">
+        <div class="hotel-option recommended">
+          <div>
+            <div class="hotel-name">Le Stanze del Duomo <span class="hotel-stars">★★★</span> <span class="rec-badge">EXPERIENCIA ÚNICA</span></div>
+            <div class="hotel-desc">Literalmente frente al Duomo. Despiertas mirando la catedral por la ventana. La mejor ubicación de la ciudad.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€152–180</div>
+            <div class="hotel-cop">$608K–$720K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+        <div class="hotel-option">
+          <div>
+            <div class="hotel-name">Hotel Abaco <span class="hotel-stars">★★★</span></div>
+            <div class="hotel-desc">Boutique céntrico clásico. Carácter florentino auténtico. Buen precio para la ciudad.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€70–95</div>
+            <div class="hotel-cop">$280K–$380K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-header">
+        <div class="hotel-city">
+          <span class="city-flag">🇮🇹</span>
+          <div>
+            <div class="hotel-city-name">Cinque Terre — base La Spezia</div>
+            <div class="hotel-nights">4–6 oct · 2 noches</div>
+          </div>
+        </div>
+      </div>
+      <div class="hotel-options">
+        <div class="hotel-option recommended">
+          <div>
+            <div class="hotel-name">Hotel Firenze La Spezia <span class="hotel-stars">★★★</span> <span class="rec-badge">ESTRATÉGICO</span></div>
+            <div class="hotel-desc">Base perfecta. Cerca de la estación para tomar el tren a los 5 pueblos. Más económico que dormir dentro del parque.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€70–90</div>
+            <div class="hotel-cop">$280K–$360K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hotel-card">
+      <div class="hotel-header">
+        <div class="hotel-city">
+          <span class="city-flag">🇨🇭</span>
+          <div>
+            <div class="hotel-city-name">Zurich</div>
+            <div class="hotel-nights">6–7 oct · 1 noche</div>
+          </div>
+        </div>
+      </div>
+      <div class="hotel-options">
+        <div class="hotel-option recommended">
+          <div>
+            <div class="hotel-name">Ruby Mimi Hotel <span class="hotel-stars">★★★</span> <span class="rec-badge">MEJOR RATIO SUIZA</span></div>
+            <div class="hotel-desc">Boutique contemporáneo. Diseño cuidado, buen transporte, el mejor precio/calidad disponible en Zurich.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€130–160</div>
+            <div class="hotel-cop">$520K–$640K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+        <div class="hotel-option">
+          <div>
+            <div class="hotel-name">Hotel Scheuble <span class="hotel-stars">★★★</span></div>
+            <div class="hotel-desc">La opción más económica del centro. Funcional, limpio, bien ubicado. Sin pretensiones.</div>
+          </div>
+          <div class="hotel-price">
+            <div class="hotel-eur">€115–140</div>
+            <div class="hotel-cop">$460K–$560K</div>
+            <div class="hotel-per">/noche</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- BUDGET TAB -->
+  <div id="tab-budget" class="tab-content">
+    <div class="section-title">Presupuesto total <span class="section-badge">en EUR y COP</span></div>
+
+    <div class="budget-container">
+      <table class="budget-table">
+        <thead>
+          <tr>
+            <th>Rubro</th>
+            <th>Detalle</th>
+            <th>€ Mínimo</th>
+            <th>€ Máximo</th>
+            <th>COP Mínimo</th>
+            <th>COP Máximo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-bright">✈️ Vuelos internos</td>
+            <td class="text-muted">BCN→ROM + ZRH→MAD</td>
+            <td class="mono text-gold">€100</td>
+            <td class="mono text-gold">€170</td>
+            <td class="mono">$400.000</td>
+            <td class="mono">$680.000</td>
+          </tr>
+          <tr>
+            <td class="text-bright">🚄 Trenes</td>
+            <td class="text-muted">MAD→BCN + Italia + Bernina + Suiza</td>
+            <td class="mono text-gold">€143</td>
+            <td class="mono text-gold">€218</td>
+            <td class="mono">$572.000</td>
+            <td class="mono">$872.000</td>
+          </tr>
+          <tr>
+            <td class="text-bright">🏨 Hospedaje Eurotrip</td>
+            <td class="text-muted">9 noches BCN/ROM/FLR/CIN/ZRH</td>
+            <td class="mono text-gold">€685</td>
+            <td class="mono text-gold">€985</td>
+            <td class="mono">$2.740.000</td>
+            <td class="mono">$3.940.000</td>
+          </tr>
+          <tr>
+            <td class="text-bright">🏨 Hospedaje Madrid</td>
+            <td class="text-muted">6 noches académicas</td>
+            <td class="mono text-gold">€480</td>
+            <td class="mono text-gold">€660</td>
+            <td class="mono">$1.920.000</td>
+            <td class="mono">$2.640.000</td>
+          </tr>
+          <tr>
+            <td class="text-bright">🍝 Comida</td>
+            <td class="text-muted">€30–45/día × 18 días</td>
+            <td class="mono text-gold">€540</td>
+            <td class="mono text-gold">€810</td>
+            <td class="mono">$2.160.000</td>
+            <td class="mono">$3.240.000</td>
+          </tr>
+          <tr>
+            <td class="text-bright">🎟️ Entradas</td>
+            <td class="text-muted">Coliseo, Vaticano, Uffizi, Camp Nou</td>
+            <td class="mono text-gold">€120</td>
+            <td class="mono text-gold">€160</td>
+            <td class="mono">$480.000</td>
+            <td class="mono">$640.000</td>
+          </tr>
+          <tr>
+            <td class="text-bright">🚇 Transporte local</td>
+            <td class="text-muted">Metro, bus, tren regional CT</td>
+            <td class="mono text-gold">€80</td>
+            <td class="mono text-gold">€120</td>
+            <td class="mono">$320.000</td>
+            <td class="mono">$480.000</td>
+          </tr>
+          <tr>
+            <td class="text-bright">🧳 Imprevistos</td>
+            <td class="text-muted">Souvenirs, urgencias, extras</td>
+            <td class="mono text-gold">€100</td>
+            <td class="mono text-gold">€150</td>
+            <td class="mono">$400.000</td>
+            <td class="mono">$600.000</td>
+          </tr>
+          <tr class="total">
+            <td>TOTAL</td>
+            <td class="text-muted">Sin vuelo MDE↔MAD</td>
+            <td class="mono text-green">€2.248</td>
+            <td class="mono text-green">€3.273</td>
+            <td class="mono text-green">$8.992.000</td>
+            <td class="mono text-green">$13.092.000</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cards-grid">
+      <div class="card">
+        <div class="card-title" style="margin-bottom:12px">💡 Dónde ahorrar</div>
+        <div class="card-detail">• Bernina en tren regional vs panorámico → ahorras €35</div>
+        <div class="card-detail">• Hotel Abaco en Florencia vs Le Stanze → ahorras €80/noche</div>
+        <div class="card-detail">• Comer en mercados locales vs restaurantes → €15 menos/día</div>
+        <div class="card-detail">• Museo del Prado Madrid gratis de 18h–20h → ahorras €15</div>
+      </div>
+      <div class="card">
+        <div class="card-title" style="margin-bottom:12px">📌 Tipo de cambio</div>
+        <div class="card-detail"><span class="card-detail-label">Referencia</span> €1 = $4.000 COP</div>
+        <div class="card-detail"><span class="card-detail-label">Hoy (2 jul)</span> €1 = $3.849 COP</div>
+        <div class="card-detail"><span class="card-detail-label">Recomendado</span> Usar Wise o Revolut</div>
+        <div class="card-detail"><span class="card-detail-label">Evitar</span> Cambio en aeropuerto o banco</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHECKLIST TAB -->
+  <div id="tab-checklist" class="tab-content">
+    <div class="section-title">Checklist de planificación</div>
+
+    <div style="margin-bottom:12px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--red); letter-spacing:1px; text-transform:uppercase;">🔴 Esta semana — urgente</div>
+    <div class="checklist" id="checklist-urgent">
+      <div class="check-item urgency-now" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Verificar vigencia del pasaporte</div>
+          <div class="check-meta">Necesitas mínimo +3 meses después del 8 oct 2026</div>
+        </div>
+      </div>
+      <div class="check-item urgency-now" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Comprar vuelo Barcelona → Roma</div>
+          <div class="check-meta">Vueling.com o Ryanair.com · €30–60 · Temporada alta sube rápido</div>
+        </div>
+      </div>
+      <div class="check-item urgency-now" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Comprar vuelo Zurich → Madrid</div>
+          <div class="check-meta">Iberia.com o Swiss · €70–110 · Directo preferiblemente</div>
+        </div>
+      </div>
+      <div class="check-item urgency-now" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Comprar tren Madrid → Barcelona</div>
+          <div class="check-meta">Ouigo.com · €15–35 · Cupos limitados en precio bajo</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:20px 0 12px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">🟡 30 junio — importante</div>
+    <div class="checklist">
+      <div class="check-item urgency-soon" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Revisar calendario LaLiga 2026–27</div>
+          <div class="check-meta">Sale el 30 jun. Confirmar si Barça juega en casa el 27 o 28 sep 🔵🔴</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:20px 0 12px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--gold); letter-spacing:1px; text-transform:uppercase;">🟡 Antes del 15 julio</div>
+    <div class="checklist">
+      <div class="check-item urgency-soon" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Reservar Bernina Express</div>
+          <div class="check-meta">berninaexpress.ch · Cupos panorámicos limitados · Reserva asiento obligatoria</div>
+        </div>
+      </div>
+      <div class="check-item urgency-soon" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Abrir cuenta Wise o Revolut</div>
+          <div class="check-meta">Para pagar en euros sin comisiones. Wise es el más confiable desde Colombia.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:20px 0 12px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--teal); letter-spacing:1px; text-transform:uppercase;">🟢 Antes del 1 agosto</div>
+    <div class="checklist">
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Reservar todos los hoteles</div>
+          <div class="check-meta">Italia en oct es temporada alta. Los precios suben 30–40% si esperas.</div>
+        </div>
+      </div>
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Comprar entradas Coliseo + Vaticano</div>
+          <div class="check-meta">coopculture.it y museivaticani.va · Se agotan con semanas de anticipación</div>
+        </div>
+      </div>
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Comprar entradas Galería Uffizi</div>
+          <div class="check-meta">uffizi.it · Reserva con 2–3 semanas mínimo en temporada</div>
+        </div>
+      </div>
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Comprar entrada Tour Camp Nou</div>
+          <div class="check-meta">fcbarcelona.com · Incluye museo y estadio</div>
+        </div>
+      </div>
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Comprar entrada Sagrada Família</div>
+          <div class="check-meta">sagradafamilia.org · Se agotan con 3 semanas · Elige turno con guía</div>
+        </div>
+      </div>
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Contratar seguro de viaje</div>
+          <div class="check-meta">Con cobertura médica en Europa. IATI o Chapka son buenas opciones desde Colombia.</div>
+        </div>
+      </div>
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Reservar trenes Italia en Trenitalia</div>
+          <div class="check-meta">Roma→FLR, FLR→La Spezia, La Spezia→Milán · trenitalia.com</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin:20px 0 12px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--teal); letter-spacing:1px; text-transform:uppercase;">🟢 Antes de salir</div>
+    <div class="checklist">
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Descargar apps: Google Maps offline, Trenitalia, Wise</div>
+          <div class="check-meta">Descarga los mapas offline de cada ciudad antes de salir</div>
+        </div>
+      </div>
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Plan de datos internacionales</div>
+          <div class="check-meta">Verifica cobertura de tu operador en España, Italia y Suiza. Alternativa: SIM europea.</div>
+        </div>
+      </div>
+      <div class="check-item urgency-before" onclick="toggleCheck(this)">
+        <div class="check-box">✓</div>
+        <div>
+          <div class="check-text">Organizar todos los tiquetes en una carpeta digital</div>
+          <div class="check-meta">Google Drive o PDF offline. Vuelos, trenes, hoteles, entradas — todo en un lugar.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUSTS TAB -->
+  <div id="tab-musts" class="tab-content">
+    <div class="section-title">Infaltables por ciudad <span class="section-badge">lo que sí o sí debes vivir</span></div>
+
+    <div class="must-grid">
+
+      <div class="must-card">
+        <div class="must-city-label" style="color:var(--barcelona)">🇪🇸 Barcelona</div>
+        <div class="must-item"><span class="must-icon">🏟️</span> Tour Camp Nou — el templo del fútbol mundial</div>
+        <div class="must-item"><span class="must-icon">⛪</span> Sagrada Família por dentro — reserva con 3 semanas</div>
+        <div class="must-item"><span class="must-icon">🌊</span> El Born de noche — la Barcelona auténtica</div>
+        <div class="must-item"><span class="must-icon">🍺</span> Cerveza con pintxos en el Barrio Gótico</div>
+      </div>
+
+      <div class="must-card">
+        <div class="must-city-label" style="color:var(--roma)">🇮🇹 Roma</div>
+        <div class="must-item"><span class="must-icon">🏛️</span> Coliseo + Foro Romano — combo, reserva online</div>
+        <div class="must-item"><span class="must-icon">🎨</span> Capilla Sixtina — lo más impactante del viaje, punto</div>
+        <div class="must-item"><span class="must-icon">🌉</span> Cruzar el Tíber de noche hacia Castel Sant'Angelo</div>
+        <div class="must-item"><span class="must-icon">🍝</span> Cacio e pepe en trattoria sin menú en inglés en la puerta</div>
+        <div class="must-item"><span class="must-icon">⛲</span> Fontana di Trevi de madrugada — sin turistas</div>
+      </div>
+
+      <div class="must-card">
+        <div class="must-city-label" style="color:var(--florencia)">🇮🇹 Florencia</div>
+        <div class="must-item"><span class="must-icon">🖼️</span> Uffizi — el Nacimiento de Venus te revienta la cabeza</div>
+        <div class="must-item"><span class="must-icon">🌅</span> Piazzale Michelangelo al atardecer — la mejor vista de Europa, gratis</div>
+        <div class="must-item"><span class="must-icon">🌉</span> Ponte Vecchio de noche — sin turistas, con luz cálida</div>
+        <div class="must-item"><span class="must-icon">🍦</span> Gelato en Vivoli — la gelatería más antigua de Florencia</div>
+      </div>
+
+      <div class="must-card">
+        <div class="must-city-label" style="color:var(--cinque)">🇮🇹 Cinque Terre</div>
+        <div class="must-item"><span class="must-icon">🥾</span> Sendero costero Vernazza–Corniglia — 2h de vistas imposibles</div>
+        <div class="must-item"><span class="must-icon">🌅</span> Atardecer desde Manarola — la postal más icónica de Italia</div>
+        <div class="must-item"><span class="must-icon">🍋</span> Pesto y focaccia local — gastronomía de Liguria subestimada</div>
+        <div class="must-item"><span class="must-icon">📸</span> Vernazza desde el castillo — la foto del viaje</div>
+      </div>
+
+      <div class="must-card">
+        <div class="must-city-label" style="color:var(--suiza)">🇨🇭 Bernina / Zurich</div>
+        <div class="must-item"><span class="must-icon">🏔️</span> Siéntate a la derecha del tren Tirano→Zurich</div>
+        <div class="must-item"><span class="must-icon">❄️</span> Glaciar Morteratsch desde la ventana — momento UNESCO</div>
+        <div class="must-item"><span class="must-icon">🌊</span> Lago de Zurich con los Alpes al fondo — el cierre perfecto</div>
+        <div class="must-item"><span class="must-icon">🏙️</span> Niederdorf a pie — 2h y tienes el casco histórico</div>
+      </div>
+
+      <div class="must-card">
+        <div class="must-city-label" style="color:#E84393">🇪🇸 Madrid (tardes académicas)</div>
+        <div class="must-item"><span class="must-icon">🖼️</span> Museo del Prado — gratis de 18h–20h entre semana</div>
+        <div class="must-item"><span class="must-icon">🌿</span> Parque del Retiro — el pulmón de Madrid</div>
+        <div class="must-item"><span class="must-icon">🍷</span> Sobrino de Botín — el restaurante más antiguo del mundo (1725)</div>
+        <div class="must-item"><span class="must-icon">🍖</span> Mercado de San Miguel — tapas, jamón, vermut</div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<script>
+  function showTab(tab) {
+    document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.nav-tab').forEach(el => el.classList.remove('active'));
+    document.getElementById('tab-' + tab).classList.add('active');
+    event.target.classList.add('active');
+  }
+
+  function toggleCheck(item) {
+    item.classList.toggle('checked');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const all = document.querySelectorAll('.check-item');
+    const checked = document.querySelectorAll('.check-item.checked');
+    const pct = Math.round((checked.length / all.length) * 100);
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent = pct + '% completado';
+  }
+
+  updateProgress();
+</script>
+
+</body>
+</html>
